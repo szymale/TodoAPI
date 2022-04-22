@@ -14,18 +14,20 @@ namespace TodoApi.Controllers
 
         // GET: api/todos
         [HttpGet]
-        public ActionResult <IEnumerable<Todo>> GetAllTodos()
+        public ActionResult<IEnumerable<Todo>> GetAllTodos()
         {
-            var todos = _repository.GetTodos();
+            var allTodos = _repository.GetTodos();
 
-            return todos;
+            return Ok(allTodos);
         }
 
         // GET api/todos/5
         [HttpGet("{id}")]
-        public string GetTodoById(int id)
+        public ActionResult<Todo> GetTodoById(int id)
         {
-            return _repository.GetTodoById(id);
+            var todoItem = _repository.GetTodoById(id);
+
+            return Ok(todoItem);
         }
 
 
