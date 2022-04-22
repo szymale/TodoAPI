@@ -19,5 +19,20 @@ namespace TodoApi.Data
         {
             return _context.Todos.ToList();
         }
+
+        public void CreateTodo(Todo todo)
+        {
+            if(todo is null) 
+            {
+                throw new ArgumentNullException(nameof(todo));
+            }
+
+            _context.Todos.Add(todo);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);            
+        }
     }
 }

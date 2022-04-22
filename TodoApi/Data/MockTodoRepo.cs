@@ -4,6 +4,11 @@ namespace TodoApi.Data
 {
     public class MockTodoRepo : ITodoRepo
     {
+        public void CreateTodo(Todo todo)
+        {
+            throw new NotImplementedException();
+        }
+
         public Todo GetTodoById(int id)
         {
             return new Todo { Id = 0, Title = "Todo item", Description = "tesk description", ExpiryTime = DateTime.Now.AddDays(14), Progress = 10 };
@@ -19,6 +24,11 @@ namespace TodoApi.Data
             };
 
             return todos;
+        }
+
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }
