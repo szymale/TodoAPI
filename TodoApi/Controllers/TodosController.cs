@@ -10,8 +10,13 @@ namespace TodoApi.Controllers
     [ApiController]
     public class TodosController : ControllerBase
     {
-        private readonly ITodoRepo _repository  = new MockTodoRepo();
+        private readonly ITodoRepo _repository;
 
+        public TodosController(ITodoRepo repository)
+        {
+            _repository = repository;
+        }
+        
         // GET: api/todos
         [HttpGet]
         public ActionResult<IEnumerable<Todo>> GetAllTodos()
@@ -21,7 +26,7 @@ namespace TodoApi.Controllers
             return Ok(allTodos);
         }
 
-        // GET api/todos/5
+        // GET api/todos/{id}
         [HttpGet("{id}")]
         public ActionResult<Todo> GetTodoById(int id)
         {
