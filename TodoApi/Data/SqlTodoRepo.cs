@@ -30,9 +30,15 @@ namespace TodoApi.Data
             _context.Todos.Add(todo);
         }
 
+        public void UpdateTodo(Todo todo)
+        {
+            //Nothing
+        }
+
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);            
         }
+
     }
 }

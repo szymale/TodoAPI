@@ -30,5 +30,10 @@ namespace TodoApi.Data
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateTodo(Todo todo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

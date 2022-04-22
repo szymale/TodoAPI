@@ -8,5 +8,6 @@ namespace TodoApi.Data
         IEnumerable<Todo> GetTodos();
         Todo GetTodoById(int id);
         void CreateTodo(Todo todo);
+        void UpdateTodo(Todo todo);
     }
 }

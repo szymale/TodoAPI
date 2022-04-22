@@ -61,20 +61,34 @@ namespace TodoApi.Controllers
             return CreatedAtAction(nameof(GetTodoById), new {Id = todoReadDto.Id}, todoReadDto);
         }
 
-
-
-
-
-
-
-
-
-
-        // PUT api/<TodosController>/5
+        // PUT api/todos/{id}
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult UpdateTodo(int id, TodoUpdateDto todoUpdateDto)
         {
+            var todoFromRepo = _repository.GetTodoById(id);
+            if (todoFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(todoUpdateDto, todoFromRepo);
+
+            _repository.UpdateTodo(todoFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
+
+
+
+
+
+
+
+
+
+
+
 
         // DELETE api/<TodosController>/5
         [HttpDelete("{id}")]

@@ -11,6 +11,7 @@ namespace TodoApi.Profiles
             // Source -> Target
             CreateMap<Todo, TodoReadDto>();
             CreateMap<TodoCreateDto, Todo>();
+            CreateMap<TodoUpdateDto, Todo>();
         }
     }
 }
