@@ -3,12 +3,14 @@ using TodoApi.Models;
 using TodoApi.Data;
 using AutoMapper;
 using TodoApi.Dtos;
+using Microsoft.AspNetCore.JsonPatch;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TodoApi.Controllers
 {
-    [Route("api/todos")]
+    [Route("[action]")]
+    //[Route("api/todos")]
     [ApiController]
     public class TodosController : ControllerBase
     {
@@ -41,6 +43,15 @@ namespace TodoApi.Controllers
             }
 
             return NotFound();
+        }
+
+        // GET api/todos/{days}
+        [HttpGet("{days}")]
+        public ActionResult<IEnumerable<TodoReadDto>> GetUpcomingTodos(double days)
+        {
+            var upcomingTodos = _repository.GetUpcomingTodos(days);
+
+            return Ok(_mapper.Map<IEnumerable<TodoReadDto>>(upcomingTodos));
         }
 
         // POST api/todos
@@ -79,21 +90,77 @@ namespace TodoApi.Controllers
             return NoContent();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        // DELETE api/<TodosController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // PUT api/todos/{id}
+        [HttpPut("{id}")]
+        public ActionResult CompleteTodo(int id)
         {
+            var todoFromRepo = _repository.GetTodoById(id);
+            if (todoFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _repository.CompleteTodo(todoFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        // PUT api/todos/{id}
+        [HttpPut("{id}")]
+        public ActionResult ProgressTodo(int id, int progress)
+        {
+            var todoFromRepo = _repository.GetTodoById(id);
+            if (todoFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _repository.ProgressTodo(todoFromRepo, progress);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        // PATCH api/todos/{id}
+        [HttpPatch("{id}")]
+        public ActionResult PartialTodoUpdate(int id, JsonPatchDocument<TodoUpdateDto> patchDoc)
+        {
+            var todoFromRepo = _repository.GetTodoById(id);
+            if (todoFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var todoToPatch = _mapper.Map<TodoUpdateDto>(todoFromRepo);
+            patchDoc.ApplyTo(todoToPatch, ModelState);
+            if(!TryValidateModel(todoToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(todoToPatch, todoFromRepo);
+
+            _repository.UpdateTodo(todoFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        // DELETE api/todos/{id}
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            var todoFromRepo = _repository.GetTodoById(id);
+            if (todoFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteTodo(todoFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

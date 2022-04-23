@@ -4,7 +4,17 @@ namespace TodoApi.Data
 {
     public class MockTodoRepo : ITodoRepo
     {
+        public void CompleteTodo(Todo todo)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateTodo(Todo todo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteTodo(Todo todo)
         {
             throw new NotImplementedException();
         }
@@ -24,6 +34,16 @@ namespace TodoApi.Data
             };
 
             return todos;
+        }
+
+        public IEnumerable<Todo> GetUpcomingTodos(double days)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ProgressTodo(Todo todo, int progress)
+        {
+            throw new NotImplementedException();
         }
 
         public bool SaveChanges()
