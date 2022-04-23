@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  todoapi:
+    image: ${DOCKER_REGISTRY-}todoapi
+    build:
+      context: .
+      dockerfile: TodoApi/Dockerfile
+
+
+  postgresql_database:
+    image: postgres:latest
+    environment:
+        - POSTGRES_USER=admin
+        - POSTGRES_PASSWORD=password
+        - POSTGRES_DB=TestDB
+    ports:
+        - "5432:5432"
+    restart: unless-stopped
+    volumes: 
+        - database-data:/var/lib/postgresql/data/
+
+volumes:
+  database-data:
