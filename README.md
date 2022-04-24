@@ -1,4 +1,4 @@
-### TODO API
+## TODO API
 ___
 
 Simple Todo API with possibility of tracking todos by specific date.
@@ -10,10 +10,10 @@ Used technology:
 + Docker
 
 ___
-# Github client:
+### Github client:
 `gh repo clone szymale/TodoAPI`
 ___
-# HTTPS:
+### HTTPS:
 `https://github.com/szymale/TodoAPI.git`
 ___
 
@@ -22,7 +22,7 @@ After cloning this repo you can run this API using Visual Studio, or by running 
 
 Default port is mapped to *localhost:4444*
 ___
-# Fearutes:
+### Fearutes:
 
 - [x] Get List of all Todos
 - [x] Get Specific Todo by Id
@@ -36,7 +36,7 @@ ___
 
 
 ___
-# Sample Request:
+### Sample Request:
 
 Get All request:
 
