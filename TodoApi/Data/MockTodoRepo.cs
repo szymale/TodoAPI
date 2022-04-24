@@ -6,7 +6,16 @@ namespace TodoApi.Data
     {
         public void CompleteTodo(Todo todo)
         {
-            throw new NotImplementedException();
+            if (todo is null)
+            {
+                throw new ArgumentNullException(nameof(todo));
+            }
+            var todoToComplete = GetTodoById(0);
+            if (todoToComplete != null)
+            {
+                todoToComplete.IsFinished = true;
+            }
+
         }
 
         public void CreateTodo(Todo todo)
@@ -27,7 +36,7 @@ namespace TodoApi.Data
 
         public void DeleteTodo(Todo todo)
         {
-            throw new NotImplementedException();
+            // nothing
         }
 
         public Todo? GetTodoById(int id)
@@ -56,22 +65,38 @@ namespace TodoApi.Data
 
         public IEnumerable<Todo> GetUpcomingTodos(double days)
         {
-            throw new NotImplementedException();
+            if (days != 0)
+            {
+                return GetTodos().Where(t => t.ExpiryTime <= DateTime.UtcNow.AddDays(days)).ToList();
+            }
+
+            throw new ArgumentException(nameof(days));
         }
 
         public void ProgressTodo(Todo todo, int progress)
         {
-            throw new NotImplementedException();
+            if (todo is null)
+            {
+                throw new ArgumentNullException(nameof(todo));
+            }
+
+            var todoProgress = GetTodoById(0);
+            if (todoProgress != null)
+            {
+                todoProgress.Progress = progress;
+            }
+
         }
 
         public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            // nothing
+            return true;
         }
 
         public void UpdateTodo(Todo todo)
         {
-            throw new NotImplementedException();
+            // nothing
         }
     }
 }

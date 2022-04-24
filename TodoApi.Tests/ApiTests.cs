@@ -58,8 +58,9 @@ namespace TodoApi.Tests
             // Assert
             Assert.IsType<ActionResult<TodoReadDto>>(result);
         }
+
         [Fact]
-        public void GetTodoById_InvalidData_Return_WrongResult()
+        public void GetTodoById_InvalidData_Return_NullResult()
         {
             // Arrange
             var controller = new TodosController(_repository, _mapper);
@@ -69,6 +70,19 @@ namespace TodoApi.Tests
 
             // Assert
             Assert.Null(result.Value);
+        }
+
+        [Fact]
+        public void GetUpcomingTodos_ValidData_Return_OkResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+
+            // Act
+            var result = controller.GetUpcomingTodos(10);
+
+            // Assert
+            Assert.IsType<ActionResult<IEnumerable<TodoReadDto>>>(result);
         }
 
         [Fact]
@@ -82,7 +96,113 @@ namespace TodoApi.Tests
             var result = controller.CreateTodo(createTodo);
 
             // Assert
-            Assert.IsType<CreatedAtActionResult>(result);
+            Assert.IsType<ActionResult<TodoReadDto>>(result);
+        }
+
+        [Fact]
+        public void UpdateTodo_ValidData_Return_NoContentResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+            var updateTodo = new TodoUpdateDto { Title = "Todo item updated", Description = "test description", ExpiryTime = DateTime.UtcNow.AddDays(14) };
+
+            // Act
+            var result = controller.UpdateTodo(0,updateTodo);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public void UpdateTodo_InvalidData_Return_NotFoundResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+            var updateTodo = new TodoUpdateDto { Title = "Todo item updated", Description = "test description", ExpiryTime = DateTime.UtcNow.AddDays(14) };
+
+            // Act
+            var result = controller.UpdateTodo(99, updateTodo);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void DeleteTodo_ValidData_Return_NoContentResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+
+            // Act
+            var result = controller.Delete(0);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public void DeleteTodo_InvalidData_Return_NotFoundResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+
+            // Act
+            var result = controller.Delete(90);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void CompleteTodo_ValidData_Return_NoContentResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+
+            // Act
+            var result = controller.CompleteTodo(0);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public void CompleteTodo_InvalidData_Return_NotFoundResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+
+            // Act
+            var result = controller.CompleteTodo(9);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void ProgressTodo_ValidData_Return_NoContentResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+
+            // Act
+            var result = controller.ProgressTodo(0,50);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public void ProgressTodo_InValidData_Return_NotFoundResult()
+        {
+            // Arrange
+            var controller = new TodosController(_repository, _mapper);
+
+            // Act
+            var result = controller.ProgressTodo(9, 50);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
         }
     }
 }
