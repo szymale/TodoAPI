@@ -11,7 +11,18 @@ namespace TodoApi.Data
 
         public void CreateTodo(Todo todo)
         {
-            throw new NotImplementedException();
+            if (todo is null)
+            {
+                throw new ArgumentNullException(nameof(todo));
+            }
+
+            Todo createTodo = new Todo();
+            createTodo.Title = todo.Title;
+            createTodo.Description = todo.Description;
+            createTodo.ExpiryTime = todo.ExpiryTime;
+            createTodo.Progress = todo.Progress;
+            createTodo.IsFinished = todo.IsFinished;
+            createTodo.Overdue = todo.Overdue;
         }
 
         public void DeleteTodo(Todo todo)
@@ -19,9 +30,16 @@ namespace TodoApi.Data
             throw new NotImplementedException();
         }
 
-        public Todo GetTodoById(int id)
+        public Todo? GetTodoById(int id)
         {
-            return new Todo { Id = 0, Title = "Todo item", Description = "tesk description", ExpiryTime = DateTime.Now.AddDays(14), Progress = 10 };
+            if (id == 0)
+            {
+                return new Todo { Id = 0, Title = "Todo item", Description = "tesk description", ExpiryTime = DateTime.Now.AddDays(14), Progress = 10 };
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Todo> GetTodos()

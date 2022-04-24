@@ -10,7 +10,7 @@ namespace TodoApi.Data
             _context = context;
         }
 
-        public Todo GetTodoById(int id)
+        public Todo? GetTodoById(int id)
         {
             return _context.Todos.FirstOrDefault(t => t.Id == id);
         }
@@ -63,7 +63,10 @@ namespace TodoApi.Data
             }
 
             var todoToComplete = _context.Todos.FirstOrDefault(t => t.Id == todo.Id);
-            todoToComplete.IsFinished = true;
+            if (todoToComplete != null)
+            {
+                todoToComplete.IsFinished = true;
+            }
         }
 
         public void ProgressTodo(Todo todo, int progress)
@@ -74,7 +77,10 @@ namespace TodoApi.Data
             }
 
             var todoProgress = _context.Todos.FirstOrDefault(t => t.Id == todo.Id);
-            todoProgress.Progress = progress;
+            if (todoProgress != null)
+            {
+                todoProgress.Progress = progress;
+            }
         }
     }
 }

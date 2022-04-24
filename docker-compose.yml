@@ -3,9 +3,14 @@ version: '3.4'
 services:
   todoapi:
     image: ${DOCKER_REGISTRY-}todoapi
+    ports:
+        - target: 443
+          published: 4444
+          protocol: tcp
     build:
       context: .
       dockerfile: TodoApi/Dockerfile
+
 
 
   postgresql_database:

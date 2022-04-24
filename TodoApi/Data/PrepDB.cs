@@ -11,10 +11,8 @@ namespace TodoApi.Data
     {
         public static void PrepPopulation(IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                SeedData(serviceScope.ServiceProvider.GetService<TodoContext>());
-            }
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            SeedData(serviceScope.ServiceProvider.GetService<TodoContext>());
         }
 
         public static void SeedData(TodoContext context)

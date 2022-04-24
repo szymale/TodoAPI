@@ -22,7 +22,7 @@ namespace TodoApi.Controllers
             _repository = repository;
             _mapper = mapper;
         }
-        
+                
         // GET: api/todos
         [HttpGet]
         public ActionResult<IEnumerable<TodoReadDto>> GetAllTodos()
@@ -69,7 +69,7 @@ namespace TodoApi.Controllers
 
             var todoReadDto = _mapper.Map<TodoReadDto>(todoModel);
 
-            return CreatedAtAction(nameof(GetTodoById), new {Id = todoReadDto.Id}, todoReadDto);
+            return CreatedAtAction(nameof(GetTodoById), new {todoReadDto.Id}, todoReadDto);
         }
 
         // PUT api/todos/{id}

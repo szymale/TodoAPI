@@ -6,7 +6,7 @@ namespace TodoApi.Data
     {
         bool SaveChanges();
         IEnumerable<Todo> GetTodos();
-        Todo GetTodoById(int id);
+        Todo? GetTodoById(int id);
         IEnumerable<Todo> GetUpcomingTodos(double days);
         void CreateTodo(Todo todo);
         void UpdateTodo(Todo todo);
