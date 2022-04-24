@@ -8,6 +8,7 @@ Used technology:
 + Entity Framework Core
 + PostgreSQL
 + Docker
++ XUnit
 
 ___
 ### Github client:
