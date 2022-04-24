@@ -17,7 +17,7 @@ ___
 `https://github.com/szymale/TodoAPI.git`
 ___
 
-After cloning this repo you can run this API using Visual Studio, or by running terminal command in project directory:
+After cloning this repo you can run this API using Visual Studio, or by running terminal command in project directory (Docker is required):
 `docker-compose up`
 
 Default port is mapped to *localhost:4444*
