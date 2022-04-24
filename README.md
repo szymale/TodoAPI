@@ -52,6 +52,6 @@ Request URL:
   https://localhost:4444/GetAllTodos
   ```
 
-To check rest request visit: `https://localhost:4444/swagger/index.html` while running this API.
+To open swagger dashbord and check rest requests visit: `https://localhost:4444/swagger/index.html` while running this API.
  
 	
