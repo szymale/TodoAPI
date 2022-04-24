@@ -30,7 +30,7 @@ ___
 - [x] Create new Todo
 - [x] Update Todo
 - [x] Partial update of Todo
-- [x] Makring Todo as "Finished"
+- [x] Marking Todo as "Finished"
 - [x] Changing Todo Progress %
 - [X] Deleting specific todo
 
