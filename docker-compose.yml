@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   todoapi:
-    image: ${DOCKER_REGISTRY-}todoapi
+    image: szyale/todoapi:latest
     ports:
         - target: 443
           published: 4444
@@ -10,6 +10,8 @@ services:
     build:
       context: .
       dockerfile: TodoApi/Dockerfile
+    depends_on:
+        - "postgresql_database"
 
 
 
