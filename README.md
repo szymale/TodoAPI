@@ -3,7 +3,11 @@ ___
 
 Simple Todo API with possibility of tracking todos by specific date.
 
-Used technology:
+This was developed and tested on Windows OS.
+
+___
+
+### Used technology:
 + .Net 6.0
 + Entity Framework Core
 + PostgreSQL
@@ -11,18 +15,25 @@ Used technology:
 + XUnit
 
 ___
+
 ### Github client:
 `gh repo clone szymale/TodoAPI`
 ___
+
 ### HTTPS:
 `https://github.com/szymale/TodoAPI.git`
 ___
+
+### Requirements:
+Docker - `https://docs.docker.com/get-docker/`
+
 
 After cloning this repo you can run this API using Visual Studio, or by running terminal command in project directory (Docker is required):
 `docker-compose up`
 
 Default port is mapped to *localhost:4444*
 ___
+
 ### Fearutes:
 
 - [x] Get List of all Todos
@@ -37,6 +48,7 @@ ___
 
 
 ___
+
 ### Sample Request:
 
 Get All request:
